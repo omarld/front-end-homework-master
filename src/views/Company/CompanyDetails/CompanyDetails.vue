@@ -23,12 +23,12 @@
                 <div class="card">
                     <header class="card-header">
                         <p class="card-header-title">
-                            Subscriptions Per Employee
+                            Number of Subscriptions
                         </p>
                     </header>
                     <div class="card-content">
                         <div class="content">
-                         <span class="title is-2">{{company.subscriptionsPerEmployee}}</span>
+                         <span class="title is-2">{{numberOfSubs}}</span>
                         </div>
                     </div>
                 </div>
@@ -44,6 +44,7 @@ export default {
   name: 'CompanyDetails',
   data: () => ({
     company: {},
+    numberOfSubs: 'Not Available',
   }),
   props: [
     'id',
@@ -51,6 +52,9 @@ export default {
   created: function created() {
     companyService.getById(this.id).then((data) => {
       this.company = data;
+      if (data.numberOfEmployees && data.subscriptionsPerEmployee) {
+        this.numberOfSubs = this.company.numberOfEmployees * this.company.subscriptionsPerEmployee;
+      }
     });
   },
 };
