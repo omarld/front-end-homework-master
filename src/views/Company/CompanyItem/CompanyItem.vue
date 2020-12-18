@@ -32,3 +32,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+a.button {
+  width: 60px;
+}
+</style>
