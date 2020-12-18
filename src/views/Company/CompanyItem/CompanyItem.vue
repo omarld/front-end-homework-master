@@ -4,7 +4,7 @@
             <div class="card-content">
                 <div class="columns">
                     <div class="column">{{company.id}}</div>
-                    <div class="column">{{company.name}}</div>
+                    <div class="column"><span class="title is-4">{{company.name}}</span></div>
                     <div class="column">
                         <a class="button is-primary is-small is-outlined"
                         v-on:click="onClick(company.id)">
