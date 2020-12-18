@@ -9,7 +9,10 @@
                 <div class="card">
                     <header class="card-header">
                         <p class="card-header-title">
-                            Number of Employess
+                            Number of Employees
+                            <button id="edit-button" class="is-small" v-on:click="editOnClick">
+                                <font-awesome-icon icon="edit" />
+                            </button>
                         </p>
                     </header>
                     <div class="card-content">
@@ -34,17 +37,34 @@
                 </div>
             </div>
         </div>
+        <EditEmployee
+        v-bind:openEditEmployee="openEditEmployee"
+        v-bind:numEmployees="company.numberOfEmployees"
+        v-bind:updateEmployee="updateEmployee"/>
     </div>
 </template>
 
 <script>
 import companyService from '@/services/CompanyService';
+import EditEmployee from '../../Shared/EditEmployee/EditEmployee.vue';
 
 export default {
   name: 'CompanyDetails',
+  components: {
+    EditEmployee,
+  },
+  methods: {
+    editOnClick: function edit() {
+      this.openEditEmployee = !this.openEditEmployee;
+    },
+    updateEmployee: function update(count) {
+      this.company.numberOfEmployees = count;
+    },
+  },
   data: () => ({
     company: {},
     numberOfSubs: 'Not Available',
+    openEditEmployee: false,
   }),
   props: [
     'id',
@@ -67,6 +87,10 @@ export default {
     }
     #company-name.title {
         margin-bottom: 0;
+    }
+
+    .card-header-title button#edit-button {
+        margin-left: 10px;
     }
 }
 
