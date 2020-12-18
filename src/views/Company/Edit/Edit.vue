@@ -1,9 +1,14 @@
 <template>
   <div class="container">
-    <label class="label">Name</label>
-    <div class="control">
-      <input class="input" type="text" placeholder="Text input">
-    </div>
+    <div class="card">
+            <div class="card-content">
+                <div class="title">{{company.name}} ({{company.id}})</div>
+            </div>
+            <label class="label">Name</label>
+          <div class="control">
+            <input class="input" type="text" v-model="name">
+          </div>
+        </div>
   </div>
 </template>
 
@@ -13,12 +18,19 @@ import companyService from '@/services/CompanyService';
 export default {
   name: 'Edit',
   data: () => ({
-    company: {},
+    name: '',
+    company: {
+      id: null,
+      name: '',
+      domain: '',
+      numberOfEmployees: null,
+      subscriptionsPerEmployee: null,
+    },
   }),
   props: [
     'id',
   ],
-  mounted: function mounted() {
+  created: function mounted() {
     companyService.getById(this.id).then((data) => {
       this.company = data;
     });
